@@ -181,7 +181,7 @@ function getIntent()
         {
             console.log(JSON.stringify(intent));
             var parentElement = document.getElementById('getIntentData');
-            parentElement.innerHTML = "Launch Intent Categories: " + JSON.stringify(intent.categories);
+            parentElement.innerHTML = "Launch Intent Action: " + JSON.stringify(intent.action);
             var intentExtras = intent.extras;
             if (intentExtras == null)
                 intentExtras = "No extras in intent";
