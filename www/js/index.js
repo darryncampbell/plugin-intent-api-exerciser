@@ -24,6 +24,7 @@ var app = {
         document.getElementById("btnStartActivityBrowser").addEventListener("click", startActivityBrowser);
         document.getElementById("btnStartActivityPickContact").addEventListener("click", startActivityPickContact);
         document.getElementById("btnStartActivityChooseImage").addEventListener("click", startActivityChooseImage);
+        document.getElementById("btnGetIntent").addEventListener("click", getIntent);
 
         registerBroadcastReceiver();
         //  Handler for new Intents sent to the application
@@ -162,7 +163,6 @@ function registerBroadcastReceiver()
         function(intent) {
             //  Broadcast received
             console.log('Received Intent: ' + JSON.stringify(intent.extras));
-            //var decodedBarcode = intent.extras["com.symbol.datawedge.data_string"];
             var parentElement = document.getElementById('broadcastData');
             parentElement.innerHTML = "Received Broadcast: " + JSON.stringify(intent.extras);
         }
@@ -172,4 +172,23 @@ function registerBroadcastReceiver()
 function unregisterBroadcastReceiver()
 {
     window.plugins.intentShim.unregisterBroadcastReceiver();
+}
+
+function getIntent()
+{
+    window.plugins.intentShim.getIntent(
+        function(intent)
+        {
+            console.log(JSON.stringify(intent));
+            var parentElement = document.getElementById('getIntentData');
+            parentElement.innerHTML = "Launch Intent Categories: " + JSON.stringify(intent.categories);
+            var intentExtras = intent.extras;
+            if (intentExtras == null)
+                intentExtras = "No extras in intent";
+            parentElement.innerHTML += "<br>Launch Intent Extras: " + JSON.stringify(intentExtras);
+        },
+        function()
+        {
+            alert('Error getting launch intent');
+        });
 }
