@@ -115,10 +115,14 @@ function startActivityPickContact()
             },
             function(intent)
             {
-                if (intent.extras.requestCode == 1)
+                if (intent.extras.requestCode == 1 && intent.extras.resultCode == window.plugins.intentShim.RESULT_OK)
                 {
                     console.log('Picked contact: ' + intent.data);
                     document.getElementById('startActivityResultData').innerHTML = "Picked Contact: " + intent.data;
+                }
+                else
+                {
+                    document.getElementById('startActivityResultData').innerHTML = "Picked Contacted Canceled";
                 }
             },
             function()
@@ -139,10 +143,14 @@ function startActivityChooseImage()
             },
             function(intent)
             {
-                if (intent.extras.requestCode == 2)
+                if (intent.extras.requestCode == 2 && intent.extras.resultCode == window.plugins.intentShim.RESULT_OK)
                 {
                     console.log('Picked image: ' + intent.data);
                     document.getElementById('startActivityResultData').innerHTML = "Picked Image: " + intent.data;
+                }
+                else
+                {
+                    document.getElementById('startActivityResultData').innerHTML = "Picked Image Canceled";
                 }
             },
             function()
