@@ -5,7 +5,6 @@
         A small application to demonstrate the API exposed by the cordova plugin: com.darryncampbell.cordova.plugin.intent.  Wraps the Android intent functionality of sendBroadcast and startActivity and various ways of receiving information back.
     </description>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -20,5 +19,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <engine name="android" spec="~6.2.3" />
     <plugin name="com.darryncampbell.cordova.plugin.intent" spec="https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent.git" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
 </widget>

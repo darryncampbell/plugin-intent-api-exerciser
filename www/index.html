@@ -31,6 +31,7 @@
     <small>Start Activity examples to launch another android activity (set and forget)</small>
     <div class="event action" id="btnStartActivityMap">Start Activity (Map URI)</div>
     <div class="event action" id="btnStartActivityBrowser">Start Activity (Browser URL)</div>
+    <div class="event action" id="btnStartActivityInstallApp">Start Activity (Install application)</div>
     <small>Start Activity examples which receive a result from the started activity.  Result will be shown below</small>
     <div class="event action" id="btnStartActivityPickContact">Start Activity for Result (Pick Contact)</div>
     <div class="event action" id="btnStartActivityChooseImage">Start Activity for Result (Choose Image)</div>
@@ -39,6 +40,8 @@
     <small>Activities can be started for a number of purposes.  The plugin pre-registers an intent filter for a custom action in the Android Manifest and the button below starts an activity with an intent that matches that filter.</small>
     <div class="event action" id="btnGetIntent">Get Intent that Launched this Activity</div>
     <div class="event display" id="getIntentData">Received intent data goes here</div>
+    <small>Assuming the application containing this plugin was started by a separate activity through StartActivityForResult, send a result back to the caller</small>
+    <div class="event action" id="btnSendResult">Send Result to the Caller who launched this Activity</div>
 
 </div>
 <script type="text/javascript" src="cordova.js"></script>

@@ -22,9 +22,11 @@ var app = {
         document.getElementById("btnStartActivityThis").addEventListener("click", startActivityThis);
         document.getElementById("btnStartActivityMap").addEventListener("click", startActivityMap);
         document.getElementById("btnStartActivityBrowser").addEventListener("click", startActivityBrowser);
+        document.getElementById("btnStartActivityInstallApp").addEventListener("click", startActivityInstallApk);
         document.getElementById("btnStartActivityPickContact").addEventListener("click", startActivityPickContact);
         document.getElementById("btnStartActivityChooseImage").addEventListener("click", startActivityChooseImage);
         document.getElementById("btnGetIntent").addEventListener("click", getIntent);
+        document.getElementById("btnSendResult").addEventListener("click", sendResultForStartActivity);
 
         registerBroadcastReceiver();
         //  Handler for new Intents sent to the application
@@ -102,6 +104,24 @@ function startActivityBrowser()
     },
     function() {},
     function() {alert('Failed to open URL via Android Intent')}
+    );
+}
+
+function startActivityInstallApk()
+{
+    window.plugins.intentShim.startActivity(
+        {
+            //  Ensure the device allows installation from unknown sources
+            //  Requires read internal storage to be granted
+			//  file:// is required for the Intent to use a file provider.  Place the specified
+			//  file (in this case testapp.apk) in the root of the external storage directory 
+			//  (getExternalStorageDirectory())
+            action: window.plugins.intentShim.ACTION_INSTALL_PACKAGE,
+            url: 'file:///testapp.apk',
+            type: 'application/vnd.android.package-archive'
+        },
+        function() {},
+        function() {alert('Failed to install application.  Enable unknown sources installation and grant read access to storage')}
     );
 }
 
@@ -199,4 +219,19 @@ function getIntent()
         {
             alert('Error getting launch intent');
         });
+}
+
+function sendResultForStartActivity()
+{
+        window.plugins.intentShim.sendResult(
+            {
+                extras: {
+                    'Test Intent': 'Successfully sent'
+                }
+            },
+            function()
+            {
+
+            }
+        );
 }
