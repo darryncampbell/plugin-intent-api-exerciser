@@ -5,6 +5,8 @@ The com.darryncampbell.cordova.plugin.intent plugin can be found at the followin
 * [NPM](https://www.npmjs.com/package/com-darryncampbell-cordova-plugin-intent)
 * [GitHub](https://github.com/darryncampbell/darryncampbell-cordova-plugin-intent)
 
+**Please always use the latest version of the plugin**
+
 ### Installation
 ```bash
 git clone https://github.com/darryncampbell/plugin-intent-api-exerciser.git
