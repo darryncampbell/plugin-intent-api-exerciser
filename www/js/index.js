@@ -112,16 +112,22 @@ function startActivityInstallApk()
     window.plugins.intentShim.startActivity(
         {
             //  Ensure the device allows installation from unknown sources
-            //  Requires read internal storage to be granted
+            //  Requires read internal storage to be granted.  The app will request this if it does
+            //  not already have it but you will need to call the intent again after it is granted.
 			//  file:// is required for the Intent to use a file provider.  Place the specified
-			//  file (in this case testapp.apk) in the root of the external storage directory 
-			//  (getExternalStorageDirectory())
+			//  file (in this case testapp.apk) in the root of the external storage directory
+			//  or a folder under that directory (getExternalStorageDirectory())
             action: window.plugins.intentShim.ACTION_INSTALL_PACKAGE,
+            //url: 'file:///in a folder/testappfolder.apk',
             url: 'file:///testapp.apk',
             type: 'application/vnd.android.package-archive'
         },
         function() {},
-        function() {alert('Failed to install application.  Enable unknown sources installation and grant read access to storage')}
+        function(info)
+        {
+            //  Check log, enable unknown sources installation and grant read access to storage
+            alert('Failed to install application: ' + info)
+        }
     );
 }
 
