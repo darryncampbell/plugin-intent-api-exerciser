@@ -109,17 +109,22 @@ function startActivityBrowser()
 
 function startActivityInstallApk()
 {
+    //  Ensure the device allows installation from unknown sources.
+    //  Requires read internal storage to be granted.  The app will request this if it does
+    //  not already have it but you will need to call the intent again after it is granted.
+    //  file:// is required for the Intent to use a file provider.  Place the specified
+    //  file in the desired external storage directory.  It is recommended to use
+    //  cordova.file.externalApplicationStorageDirectory or similar, as shown below
+    //  (https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-file/):
+    var sdCardRoot = cordova.file.externalRootDirectory;
+    var sdCardApplication = cordova.file.externalApplicationStorageDirectory;
+    var testFile1 = sdCardRoot + "testapp.apk";
+    var testFile2 = sdCardApplication + "downloads/testapp.apk";
     window.plugins.intentShim.startActivity(
         {
-            //  Ensure the device allows installation from unknown sources
-            //  Requires read internal storage to be granted.  The app will request this if it does
-            //  not already have it but you will need to call the intent again after it is granted.
-			//  file:// is required for the Intent to use a file provider.  Place the specified
-			//  file (in this case testapp.apk) in the root of the external storage directory
-			//  or a folder under that directory (getExternalStorageDirectory())
             action: window.plugins.intentShim.ACTION_INSTALL_PACKAGE,
-            //url: 'file:///in a folder/testappfolder.apk',
-            url: 'file:///testapp.apk',
+            url: testFile1,
+            //url: testFile2,
             type: 'application/vnd.android.package-archive'
         },
         function() {},
