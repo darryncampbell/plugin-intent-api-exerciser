@@ -25,6 +25,7 @@ var app = {
         document.getElementById("btnStartActivityInstallApp").addEventListener("click", startActivityInstallApk);
         document.getElementById("btnStartActivityPickContact").addEventListener("click", startActivityPickContact);
         document.getElementById("btnStartActivityChooseImage").addEventListener("click", startActivityChooseImage);
+        document.getElementById("btnStartActivityUnrecognised").addEventListener("click", startActivityUnrecognised);
         document.getElementById("btnGetIntent").addEventListener("click", getIntent);
         document.getElementById("btnSendResult").addEventListener("click", sendResultForStartActivity);
 
@@ -78,7 +79,7 @@ function startActivityThis()
                         'random.number': Math.floor((Math.random() * 1000) + 1)
                     }
                 },
-                function() {},
+                function() {console.log('Start activity success');},
                 function() {alert('Failed to open URL via Android Intent')}
             );
 }
@@ -192,6 +193,25 @@ function startActivityChooseImage()
 
 }
 
+function startActivityUnrecognised()
+{
+        window.plugins.intentShim.startActivity(
+                {
+                    action: "com.darryncampbell.unrecognised.ACTION",
+                    extras: {
+                        'random.number': Math.floor((Math.random() * 1000) + 1)
+                    }
+                },
+                function()
+                {
+                    document.getElementById('startActivityUnrecognisedResultData').innerHTML = "Success! (Do not expect to see this)";
+                },
+                function()
+                {
+                    document.getElementById('startActivityUnrecognisedResultData').innerHTML = "Activity is not recognised (this is a good thing) " + Math.floor((Math.random() * 1000) + 1);
+                }
+            );
+}
 function registerBroadcastReceiver()
 {
     window.plugins.intentShim.registerBroadcastReceiver({
