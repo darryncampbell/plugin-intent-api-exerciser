@@ -23,6 +23,7 @@ var app = {
         document.getElementById("btnStartActivityMap").addEventListener("click", startActivityMap);
         document.getElementById("btnStartActivityBrowser").addEventListener("click", startActivityBrowser);
         document.getElementById("btnStartActivityInstallApp").addEventListener("click", startActivityInstallApk);
+        document.getElementById("btnStartActivitySendImage").addEventListener("click", startActivitySendImage);
         document.getElementById("btnStartActivityPickContact").addEventListener("click", startActivityPickContact);
         document.getElementById("btnStartActivityChooseImage").addEventListener("click", startActivityChooseImage);
         document.getElementById("btnStartActivityUnrecognised").addEventListener("click", startActivityUnrecognised);
@@ -90,6 +91,22 @@ function startActivityMap()
                 {
                     action: window.plugins.intentShim.ACTION_VIEW,
                     url: 'geo:0,0?q=London'
+                },
+                function() {},
+                function() {alert('Failed to open URL via Android Intent')}
+            );
+}
+
+function startActivitySendImage()
+{
+        window.plugins.intentShim.startActivity(
+                {
+                    action: window.plugins.intentShim.ACTION_SEND,
+                    type: "image/*",
+                    extras: {
+                        //  Change this URL to a URL of an actual picture on your device
+                        'android.intent.extra.STREAM': "file:///storage/emulated/0/Pictures/1480088926980.jpg"
+                    }
                 },
                 function() {},
                 function() {alert('Failed to open URL via Android Intent')}
