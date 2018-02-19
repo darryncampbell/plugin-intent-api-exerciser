@@ -76,6 +76,7 @@ function startActivityThis()
         window.plugins.intentShim.startActivity(
                 {
                     action: "com.darryncampbell.cordova.plugin.intent.ACTION",
+                    package: "com.darryncampbell.cordova.plugin.intent.api.exerciser", //setPackage
                     extras: {
                         'random.number': Math.floor((Math.random() * 1000) + 1)
                     }
