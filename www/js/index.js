@@ -26,7 +26,9 @@ var app = {
         document.getElementById("btnStartActivitySendImage").addEventListener("click", startActivitySendImage);
         document.getElementById("btnStartActivityPickContact").addEventListener("click", startActivityPickContact);
         document.getElementById("btnStartActivityChooseImage").addEventListener("click", startActivityChooseImage);
+        document.getElementById("btnStartActivityExplicit").addEventListener("click", startActivityExplicit);
         document.getElementById("btnStartActivityUnrecognised").addEventListener("click", startActivityUnrecognised);
+        document.getElementById("btnStartService").addEventListener("click", startService);
         document.getElementById("btnGetIntent").addEventListener("click", getIntent);
         document.getElementById("btnSendResult").addEventListener("click", sendResultForStartActivity);
 
@@ -211,6 +213,32 @@ function startActivityChooseImage()
 
 }
 
+function startActivityExplicit()
+{
+        window.plugins.intentShim.startActivity(
+            {
+                component:
+                {
+                    "package": "com.darryncampbell.cordova.plugin.intent.api.exerciser",
+                    "class": "com.darryncampbell.cordova.plugin.intent.api.exerciser.MainActivity"
+                },
+                extras:
+                {
+                    'random.number': Math.floor((Math.random() * 1000) + 1)
+                }
+            },
+            function(intent)
+            {
+                document.getElementById('startActivityResultData').innerHTML = "StartActivity success";
+            },
+            function()
+            {
+                document.getElementById('startActivityResultData').innerHTML = "StartActivity failure";
+            }
+        );
+
+}
+
 function startActivityUnrecognised()
 {
         window.plugins.intentShim.startActivity(
@@ -230,6 +258,33 @@ function startActivityUnrecognised()
                 }
             );
 }
+
+function startService()
+{
+        window.plugins.intentShim.startService(
+            {
+                action: "Test Start Service",
+                component:
+                {
+                    "package": "com.darryncampbell.pluginintentapiexerciserhelper",
+                    "class": "com.darryncampbell.pluginintentapiexerciserhelper.MyIntentService"
+                },
+                extras:
+                {
+                    'random.number': Math.floor((Math.random() * 1000) + 1)
+                }
+            },
+            function()
+            {
+                document.getElementById('startServiceData').innerHTML = "StartService Success";
+            },
+            function()
+            {
+                document.getElementById('startServiceData').innerHTML = "StartService Failure";
+            }
+        );
+}
+
 function registerBroadcastReceiver()
 {
     window.plugins.intentShim.registerBroadcastReceiver({
