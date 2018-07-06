@@ -199,6 +199,23 @@ function startActivityChooseImage()
                 {
                     console.log('Picked image: ' + intent.data);
                     document.getElementById('startActivityResultData').innerHTML = "Picked Image: " + intent.data;
+
+                    //  Convert the returned URI to a real path (requires plugin 1.1.0)
+                    window.plugins.intentShim.realPathFromUri(
+                        {
+                            uri: intent.data
+                        },
+                        function(realPath)
+                        {
+                            var realPathOutput = "  [" + realPath + "]";
+                            document.getElementById('startActivityResultData').innerHTML += realPathOutput;
+                        },
+                        function()
+                        {
+                            //  Failed to resolve URI to path
+                            console.log('Failed to resolve URI to path');
+                        }
+                    );
                 }
                 else
                 {
@@ -207,7 +224,7 @@ function startActivityChooseImage()
             },
             function()
             {
-                document.getElementById('startActivityResultData').innerHTML = "StartActivityForResult failure";
+                document.getElementById('startActivityResultData').innerHTML = "Picked Image failure";
             }
         );
 
