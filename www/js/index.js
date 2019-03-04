@@ -347,7 +347,10 @@ function sendResultForStartActivity()
         window.plugins.intentShim.sendResult(
             {
                 extras: {
-                    'Test Intent': 'Successfully sent'
+                    'Test Intent': 'Successfully sent',
+                    'Test Intent int': 42,
+                    'Test Intent bool': true,
+                    'Test Intent double': parseFloat("142.12")
                 }
             },
             function()
